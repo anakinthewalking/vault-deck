@@ -2,13 +2,13 @@
 
 **An IoT-based mechatronic telemetry station and handheld cyberdeck, built around an ESP32.**
 
-![Vault-Deck MK-I final view](docs/images/01_cyberdeck_final_view.jpg)
+> The full write-up with figures, BOM and exploded views is available as a [PDF](docs/Vault-Deck_Project_Document.pdf), and all project photos and renders are in [`docs/images/`](docs/images/).
 
-I built Vault-Deck MK-I to answer one question: can I take a project from CAD to firmware to signal processing and keep all of it inside a single holdable, rigid enclosure? The result is a battery-powered handheld that reads environmental sensors in real time, streams cleaned-up telemetry over Wi-Fi to a MATLAB dashboard, talks to cloud APIs (Spotify, OpenWeather), and has a small game built in.
+I built Vault-Deck MK-I to answer one question: can I take a project from CAD to firmware to signal processing and keep all of it inside a single holdable, rigid enclosure? The result is a battery-powered handheld that reads environmental sensors in real time, streams cleaned-up telemetry over Wi-Fi to a MATLAB dashboard, talks to cloud APIs (Spotify and OpenWeather), and has a small game built in.
 
 It is a deliberate mix of the three areas I care most about: mechanics, electronics, and software.
 
-> A full write-up with figures, BOM and exploded views is in [`docs/`](docs/), and all project photos and renders are in [`docs/images/`](docs/images/).
+![Vault-Deck MK-I final view](docs/images/01_cyberdeck_final_view.jpg)
 
 ---
 
