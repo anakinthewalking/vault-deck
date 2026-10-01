@@ -2,9 +2,13 @@
 
 **An IoT-based mechatronic telemetry station and handheld cyberdeck, built around an ESP32.**
 
+![Vault-Deck MK-I final view](docs/images/01_cyberdeck_final_view.jpg)
+
 I built Vault-Deck MK-I to answer one question: can I take a project from CAD to firmware to signal processing and keep all of it inside a single holdable, rigid enclosure? The result is a battery-powered handheld that reads environmental sensors in real time, streams cleaned-up telemetry over Wi-Fi to a MATLAB dashboard, talks to cloud APIs (Spotify, OpenWeather), and has a small game built in.
 
 It is a deliberate mix of the three areas I care most about: mechanics, electronics, and software.
+
+> A full write-up with figures, BOM and exploded views is in [`docs/`](docs/), and all project photos and renders are in [`docs/images/`](docs/images/).
 
 ---
 
@@ -14,7 +18,7 @@ It is a deliberate mix of the three areas I care most about: mechanics, electron
 - **Tab-based state machine**: each tab is a state with its own draw and update routine, and the D-pad moves between them. Timing for telemetry, API polling, weather refresh and game frames is handled with `millis()` timers.
 - **Spotify Web API (OAuth 2.0)**: the deck acts as a remote media controller. It authenticates with a refresh token, shows the current track, artist and duration, and lets me skip or pause/resume. Between API polls, the track progress is predicted locally from the ESP32's clock, so the progress bar stays smooth without spamming Spotify's servers.
 - **OpenWeather API**: fetches outdoor temperature and humidity for Istanbul every 10 minutes, parses the JSON with ArduinoJson, and shows it next to the onboard DHT22 indoor readings.
-- **10 Hz UDP telemetry to MATLAB**: while the `DIAG` tab is active, the deck broadcasts microphone, potentiometer, temperature and light data to a custom oscilloscope-style MATLAB dashboard.
+- **10 Hz UDP telemetry to MATLAB**: while the `DIAG` tab is active, the deck sends microphone, potentiometer, temperature and light data to a custom oscilloscope-style MATLAB dashboard.
 - **On-device signal processing**: see below.
 - **Tactical flashlight**: the 10K potentiometer controls the PWM brightness of a yellow LED, with an automotive-style gauge drawn on the display.
 - **Orbit Defense**: a small three-lane arcade game coded into the firmware, with a high score and a boost button.
@@ -31,6 +35,8 @@ Raw analog sensor data is noisy, so the telemetry pipeline cleans it up before s
 | **50 Hz AC flicker** from room lighting picked up by the LDR | An exponential moving average: `smoothedLDR = smoothedLDR * 0.85 + rawLDR * 0.15` |
 
 Each packet is a simple comma-separated line: `mic,pot,temp,ldr`.
+
+![MATLAB telemetry dashboard](docs/images/10_matlab_telemetry_a.png)
 
 ## Hardware
 
@@ -63,11 +69,12 @@ Design-for-3D-printing rules I followed:
 - Circular cutouts have a +0.2 to +0.3 mm offset (for example, the 7 mm potentiometer shaft) to compensate for plastic shrinkage.
 - M2 screw standoffs have a minimum 5 mm outer diameter so they don't split when the screws are tightened.
 
+![Exploded view and BOM](docs/images/14_exploded_view_and_bom.png)
 
 ## Repository structure
 
 ```
-Vault-Deck/
+vault-deck/
 ├── src/                  # Vault-OS firmware
 ├── include/              # credentials template
 ├── docs/                 # project document and images
@@ -107,6 +114,12 @@ pio device monitor
 ## What I learned
 
 This project taught me that the hard part of mechatronics is the interfaces between disciplines: a screw standoff has to survive the torque of assembly, a buck converter's heat has to be vented by the CAD, and an ADC has to be given time to settle before any filtering can do something useful.
+
+## Known limitations
+
+- The Spotify connection uses HTTPS, but certificate validation is turned off (`setInsecure()`) to keep the prototype simple. A production version should pin or validate Spotify's certificates.
+- Telemetry is only sent while the `DIAG` tab is open, and Spotify is only polled while the `RDO` tab is open.
+- Some short blocking `delay()` calls remain in the main loop (button debouncing and display refresh).
 
 ## Roadmap
 
