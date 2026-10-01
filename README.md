@@ -80,8 +80,8 @@ Vault-Deck/
 **Requirements:** [PlatformIO](https://platformio.org/) (VS Code extension or CLI), an ESP32 board, and the hardware listed above.
 
 ```bash
-git clone https://github.com/anakinthewalking/Vault-Deck.git
-cd Vault-Deck
+git clone https://github.com/anakinthewalking/vault-deck.git
+cd vault-deck
 ```
 
 **1. Credentials.** Copy `include/secrets.example.h` to `include/secrets.h` and fill in your Wi-Fi name and password, your PC's local IP and the UDP port, your OpenWeather API key, and your Spotify client ID, client secret and refresh token. `secrets.h` is listed in `.gitignore`, so it is never committed.
