@@ -8,7 +8,9 @@ I built Vault-Deck MK-I to answer one question: can I take a project from CAD to
 
 It is a deliberate mix of the three areas I care most about: mechanics, electronics, and software.
 
-![Vault-Deck MK-I final view](docs/images/01_cyberdeck_final_view.jpeg)
+<p align="center">
+  <img src="docs/images/01_cyberdeck_final_view.jpeg" alt="Vault-Deck MK-I final view" width="320">
+</p>
 
 ---
 
@@ -36,7 +38,9 @@ Raw analog sensor data is noisy, so the telemetry pipeline cleans it up before s
 
 Each packet is a simple comma-separated line: `mic,pot,temp,ldr`.
 
-![MATLAB telemetry dashboard](docs/images/10_matlab_telemetry_a.jpg)
+<p align="center">
+  <img src="docs/images/10_matlab_telemetry_a.jpg" alt="MATLAB telemetry dashboard" width="600">
+</p>
 
 ## Hardware
 
@@ -69,7 +73,9 @@ Design-for-3D-printing rules I followed:
 - Circular cutouts have a +0.2 to +0.3 mm offset (for example, the 7 mm potentiometer shaft) to compensate for plastic shrinkage.
 - M2 screw standoffs have a minimum 5 mm outer diameter so they don't split when the screws are tightened.
 
-![Exploded view and BOM](docs/images/14_exploded_view_and_bom.jpg)
+<p align="center">
+  <img src="docs/images/14_exploded_view_and_bom.jpg" alt="Exploded view and BOM" width="700">
+</p>
 
 ## Repository structure
 
@@ -110,6 +116,10 @@ pio device monitor
 - The power-bus perfboard removed the wiring clutter, and I saw no voltage drops during heavy Wi-Fi and display use.
 - Telemetry ran at a steady 10 Hz over the local network with near-zero packet loss in my tests.
 - Peak detection and the EMA filter gave clean, readable waveforms on the MATLAB side.
+
+<p align="center">
+  <img src="docs/images/15_wiring_diagram.svg" alt="Wiring diagram" width="900">
+</p>
 
 ## What I learned
 
